@@ -60,6 +60,48 @@ td:last-child { color: #1a1a1a; font-weight: 500; }
 .cta-sub { color: #6b7280; font-size: 13px; margin-top: 12px; }
 .footer { text-align: center; padding: 24px; border-top: 1px solid #e5e5e5; color: #9ca3af; font-size: 12px; }
 @media (max-width: 768px) { .problem-grid, .pillars { grid-template-columns: 1fr; } .scale-grid { grid-template-columns: repeat(2, 1fr); } .header { padding: 40px 24px; } .header h1 { font-size: 28px; } .content { padding: 32px 24px; } }
+
+    /* DARK MODE */
+    body.dark { background: #0a0a0a; color: #fff; }
+    body.dark .content { color: #fff; }
+    body.dark .section h2 { color: #5DF7B5; border-color: #222; }
+    body.dark p { color: #999; }
+    body.dark .prob-card.problem { background: rgba(220,38,38,0.08); border-color: #7f1d1d; }
+    body.dark .prob-card.problem .label { color: #fca5a5; }
+    body.dark .prob-card.solution { background: rgba(93,247,181,0.06); border-color: #14532d; }
+    body.dark .prob-card.solution .label { color: #5DF7B5; }
+    body.dark .prob-card h3 { color: #fff; }
+    body.dark .prob-card p { color: #999; }
+    body.dark .pillar { border-color: #222; background: #111; }
+    body.dark .pillar:hover { border-color: #5DF7B5; }
+    body.dark .pillar h3 { color: #fff; }
+    body.dark .pillar p, body.dark .pillar li { color: #888; }
+    body.dark .scale-card { border-color: #222; background: #111; }
+    body.dark .scale-card:hover { border-color: #5DF7B5; }
+    body.dark .scale-card h4 { color: #fff; }
+    body.dark .scale-card p { color: #888; }
+    body.dark .int-tag { border-color: #333; background: #111; color: #888; }
+    body.dark .cred { background: rgba(93,247,181,0.06); border-color: #14532d; }
+    body.dark .cred .big { color: #fff; }
+    body.dark .cred p { color: #888; }
+    body.dark table th { background: #111; color: #888; border-color: #333; }
+    body.dark table td { color: #888; border-color: #222; }
+    body.dark table td:last-child { color: #fff; }
+    body.dark .sec-item { border-color: #222; background: #111; }
+    body.dark .sec-item strong { color: #fff; }
+    body.dark .sec-item span { color: #888; }
+    body.dark .cta-sub { color: #666; }
+    body.dark .footer { border-color: #222; color: #555; }
+
+    /* Toggle button */
+    .mode-toggle { position: fixed; top: 16px; right: 16px; z-index: 999; background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 8px 14px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: #fff; transition: all 0.2s; }
+    .mode-toggle:hover { background: rgba(255,255,255,0.2); }
+    body:not(.dark) .mode-toggle { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); color: #1a1a1a; }
+    body:not(.dark) .mode-toggle:hover { background: rgba(0,0,0,0.1); }
+
+    /* Smooth transition */
+    body, .prob-card, .pillar, .scale-card, .int-tag, .cred, .sec-item, table th, table td, .footer { transition: background 0.3s, color 0.3s, border-color 0.3s; }
+
 </style>
 </head>
 <body>
@@ -269,5 +311,26 @@ td:last-child { color: #1a1a1a; font-weight: 500; }
 </div>
 
 <div class="footer">&copy; 2026 TreasuryPath Inc.</div>
+
+<button class="mode-toggle" onclick="toggleMode()" id="modeBtn">🌙 Dark</button>
+<script>
+function toggleMode() {
+  const body = document.body;
+  const btn = document.getElementById('modeBtn');
+  body.classList.toggle('dark');
+  if (body.classList.contains('dark')) {
+    btn.textContent = '☀️ Light';
+    localStorage.setItem('tpath-mode', 'dark');
+  } else {
+    btn.textContent = '🌙 Dark';
+    localStorage.setItem('tpath-mode', 'light');
+  }
+}
+// Restore preference
+if (localStorage.getItem('tpath-mode') === 'dark') {
+  document.body.classList.add('dark');
+  document.getElementById('modeBtn').textContent = '☀️ Light';
+}
+</script>
 </body>
 </html>
